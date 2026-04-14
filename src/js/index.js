@@ -9,4 +9,7 @@ let mid = Math.round((array.length - 1) / 2);
 console.log(array.length - 1);
 console.log(mid);
 console.log(array[mid]);
-console.log(tree);
+Tree.prettyPrint(tree.root);
+
+console.log(tree.includes(1));
+console.log(tree.includes(0));

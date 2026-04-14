@@ -7,6 +7,10 @@ export class Tree {
     this.#root = this.#buildTree(array, 0, array.length - 1);
   }
 
+  get root() {
+    return this.#root;
+  }
+
   #buildTree(array, start, end) {
     if (start > end) return null;
 
@@ -40,5 +44,45 @@ export class Tree {
     root.rightChild = this.#buildTree(array, mid + 1, end);
 
     return root;
+  }
+
+  static prettyPrint(node, prefix = "", isLeft = true) {
+    if (node === null || node === undefined) {
+      return;
+    }
+
+    Tree.prettyPrint(
+      node.rightChild,
+      `${prefix}${isLeft ? "│   " : "    "}`,
+      false,
+    );
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
+    Tree.prettyPrint(
+      node.leftChild,
+      `${prefix}${isLeft ? "    " : "│   "}`,
+      true,
+    );
+  }
+
+  includes(value) {
+    if (!Number.isSafeInteger(value)) {
+      throw new TypeError("Value must be an integer");
+    }
+
+    let current = this.#root;
+
+    while (current !== null) {
+      if (Object.is(value, current.value)) {
+        return true;
+      }
+
+      if (value < current.value) {
+        current = current.leftChild;
+      } else {
+        current = current.rightChild;
+      }
+    }
+
+    return false;
   }
 }

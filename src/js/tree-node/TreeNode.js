@@ -1,10 +1,10 @@
-export class Node {
+export class TreeNode {
   #value = null;
   #rightChild = null;
   #leftChild = null;
 
   constructor(value) {
-    this.value = value;
+    this.#value = value;
   }
 
   get value() {
@@ -20,7 +20,7 @@ export class Node {
   }
 
   set rightChild(node) {
-    if (!(node instanceof Node) && node !== null) {
+    if (!(node instanceof TreeNode) && node !== null) {
       throw new Error("Right Child Node must be a type of Node");
     }
     this.#rightChild = node;
@@ -31,7 +31,7 @@ export class Node {
   }
 
   set leftChild(node) {
-    if (!(node instanceof Node) && node !== null) {
+    if (!(node instanceof TreeNode) && node !== null) {
       throw new Error("Left Child Node must be a type of Node");
     }
     this.#leftChild = node;

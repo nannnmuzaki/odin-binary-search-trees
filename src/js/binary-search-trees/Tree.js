@@ -85,4 +85,34 @@ export class Tree {
 
     return false;
   }
+
+  insert(value) {
+    if (!Number.isSafeInteger(value)) {
+      throw new TypeError("Value must be an integer");
+    }
+
+    let current = this.#root;
+
+    while (current !== null) {
+      if (Object.is(value, current.value)) {
+        return;
+      }
+
+      if (value < current.value && current.leftChild !== null) {
+        current = current.leftChild;
+      } else if (value > current.value && current.rightChild !== null) {
+        current = current.rightChild;
+      } else {
+        break;
+      }
+    }
+
+    console.log(current);
+
+    if (value < current.value) {
+      current.leftChild = new TreeNode(value);
+    } else {
+      current.rightChild = new TreeNode(value);
+    }
+  }
 }

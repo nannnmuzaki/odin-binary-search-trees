@@ -13,3 +13,7 @@ Tree.prettyPrint(tree.root);
 
 console.log(tree.includes(1));
 console.log(tree.includes(0));
+
+tree.insert(4);
+tree.insert(1);
+Tree.prettyPrint(tree.root);

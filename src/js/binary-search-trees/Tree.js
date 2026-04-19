@@ -115,4 +115,40 @@ export class Tree {
       current.rightChild = new TreeNode(value);
     }
   }
+
+  #deleteNode(root, value) {
+    if (!Number.isSafeInteger(value)) {
+      throw new TypeError("Value must be an integer");
+    }
+
+    if (root === null) return root;
+
+    if (value < root.data) {
+      root = this.#deleteNode(root.left, value);
+    } else if (value > root.data) {
+      root = this.#deleteNode(root.right, value);
+    } else {
+      if (root.left === null) {
+        return root.right;
+      }
+      if (root.right === null) {
+        return root.left;
+      }
+
+      const inorderSuccessor = this.#getInorderSuccessor(root);
+      root.value = inorderSuccessor.value;
+      root.rightChild = this.#deleteNode(root.right, inorderSuccessor.value);
+    }
+  }
+
+  #getInorderSuccessor(current) {
+    if (current === null || !(current instanceof TreeNode)) {
+      throw new TypeError("Current node parameter must be a type of TreeNode");
+    }
+    current = current.rightChild;
+    while (current !== null && current.leftChild !== null) {
+      current = current.leftChild;
+    }
+    return current;
+  }
 }

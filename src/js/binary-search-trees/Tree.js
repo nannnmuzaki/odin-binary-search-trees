@@ -1,3 +1,4 @@
+import { Queue } from "../Queue/Queue.js";
 import { TreeNode } from "../tree-node/TreeNode.js";
 
 export class Tree {
@@ -158,5 +159,25 @@ export class Tree {
 
   delete(value) {
     this.#deleteNode(this.#root, value);
+  }
+
+  levelOrderForEach(callback) {
+    const queue = new Queue();
+
+    queue.enqueue(this.#root);
+
+    while (queue.size > 0) {
+      let current = queue.dequeue().value;
+
+      callback(current);
+
+      if (current.leftChild !== null) {
+        queue.enqueue(current.leftChild);
+      }
+
+      if (current.rightChild !== null) {
+        queue.enqueue(current.rightChild);
+      }
+    }
   }
 }

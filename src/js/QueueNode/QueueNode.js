@@ -20,7 +20,7 @@ export class QueueNode {
 
   set nextNode(node) {
     if (!(node instanceof QueueNode) && node !== null) {
-      throw new Error("Right Child Node must be a type of QueueNode");
+      throw new Error("nextNode must be a type of QueueNode");
     }
     this.#nextNode = node;
   }

@@ -20,3 +20,7 @@ tree.insert(1);
 Tree.prettyPrint(tree.root);
 tree.delete(5);
 Tree.prettyPrint(tree.root);
+
+tree.levelOrderForEach((node) => {
+  console.log(node.value);
+});

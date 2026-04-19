@@ -5,10 +5,6 @@ let array = [1, 5, 9, 14, 23, 27];
 
 const tree = new Tree(array);
 
-let mid = Math.round((array.length - 1) / 2);
-console.log(array.length - 1);
-console.log(mid);
-console.log(array[mid]);
 Tree.prettyPrint(tree.root);
 
 console.log(tree.includes(1));
@@ -22,5 +18,11 @@ tree.delete(5);
 Tree.prettyPrint(tree.root);
 
 tree.levelOrderForEach((node) => {
+  console.log(node.value);
+});
+
+console.log("===========================");
+
+tree.inOrderForEach((node) => {
   console.log(node.value);
 });

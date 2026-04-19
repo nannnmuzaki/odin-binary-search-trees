@@ -108,8 +108,6 @@ export class Tree {
       }
     }
 
-    console.log(current);
-
     if (value < current.value) {
       current.leftChild = new TreeNode(value);
     } else {
@@ -121,7 +119,6 @@ export class Tree {
     if (!Number.isSafeInteger(value)) {
       throw new TypeError("Value must be an integer");
     }
-    console.log(root.value);
 
     if (root === null) return root;
 
@@ -182,6 +179,26 @@ export class Tree {
       if (current.rightChild !== null) {
         queue.enqueue(current.rightChild);
       }
+    }
+  }
+
+  inOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Callback function is required");
+    }
+
+    let stack = [];
+    let current = this.#root;
+    while (current !== null || stack.length > 0) {
+      while (current !== null) {
+        stack.push(current);
+        current = current.leftChild;
+      }
+
+      current = stack.pop();
+      callback(current);
+
+      current = current.rightChild;
     }
   }
 }

@@ -32,7 +32,7 @@ export class TreeNode {
 
   set leftChild(node) {
     if (!(node instanceof TreeNode) && node !== null) {
-      throw new Error("Left Child Node must be a type of Node");
+      throw new Error("Left Child Node must be a type of TreeNode");
     }
     this.#leftChild = node;
   }

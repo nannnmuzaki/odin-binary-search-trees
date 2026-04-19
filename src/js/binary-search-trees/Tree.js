@@ -5,18 +5,8 @@ export class Tree {
   #root = null;
 
   constructor(array) {
-    this.#root = this.#buildTree(array, 0, array.length - 1);
-  }
-
-  get root() {
-    return this.#root;
-  }
-
-  #buildTree(array, start, end) {
-    if (start > end) return null;
-
     if (!Array.isArray(array)) {
-      throw new Error("buildTree argument must be an array");
+      throw new Error("Tree constructor argument must be an array");
     }
 
     let n = array.length;
@@ -31,12 +21,22 @@ export class Tree {
       }
     }
 
-    let sorted = false;
+    const sanitizedArray = [
+      ...new Set(
+        array.sort((a, b) => {
+          return a - b;
+        }),
+      ),
+    ];
+    this.#root = this.#buildTree(sanitizedArray, 0, sanitizedArray.length - 1);
+  }
 
-    if (!sorted) {
-      array.sort((a, b) => a - b);
-      sorted = true; // eslint-disable-line
-    }
+  get root() {
+    return this.#root;
+  }
+
+  #buildTree(array, start, end) {
+    if (start > end) return null;
 
     let mid = start + Math.round((end - start) / 2);
     let root = new TreeNode(array[mid]);
@@ -123,9 +123,9 @@ export class Tree {
     if (root === null) return root;
 
     if (value < root.value) {
-      root = this.#deleteNode(root.leftChild, value); // eslint-disable-line
+      root.leftChild = this.#deleteNode(root.leftChild, value);
     } else if (value > root.value) {
-      root = this.#deleteNode(root.rightChild, value); // eslint-disable-line
+      root.rightChild = this.#deleteNode(root.rightChild, value);
     } else {
       if (root.leftChild === null) {
         return root.rightChild;
@@ -141,6 +141,7 @@ export class Tree {
         inorderSuccessor.value,
       );
     }
+    return root;
   }
 
   #getInorderSuccessor(current) {

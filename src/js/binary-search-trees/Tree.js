@@ -16,11 +16,11 @@ export class Tree {
 
     let n = array.length;
 
-    if (array.length === 0) {
+    if (n === 0) {
       throw new Error("cannot pass empty array as argument");
     }
 
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < n; i++) {
       if (!Number.isSafeInteger(i)) {
         throw new TypeError("All array element must be an integer");
       }
@@ -30,7 +30,7 @@ export class Tree {
 
     if (!sorted) {
       array.sort((a, b) => a - b);
-      sorted = true;
+      sorted = true; // eslint-disable-line
     }
 
     let mid = start + Math.round((end - start) / 2);
@@ -120,9 +120,9 @@ export class Tree {
     if (root === null) return root;
 
     if (value < root.data) {
-      root = this.#deleteNode(root.left, value);
+      root = this.#deleteNode(root.left, value); // eslint-disable-line
     } else if (value > root.data) {
-      root = this.#deleteNode(root.right, value);
+      root = this.#deleteNode(root.right, value); // eslint-disable-line
     } else {
       if (root.left === null) {
         return root.right;

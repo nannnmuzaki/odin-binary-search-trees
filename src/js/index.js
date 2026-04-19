@@ -17,12 +17,22 @@ Tree.prettyPrint(tree.root);
 tree.delete(5);
 Tree.prettyPrint(tree.root);
 
+console.log("============= Level Order Traversal ==============");
 tree.levelOrderForEach((node) => {
   console.log(node.value);
 });
 
-console.log("===========================");
-
+console.log("============= In Order Traversal ==============");
 tree.inOrderForEach((node) => {
+  console.log(node.value);
+});
+
+console.log("============= Pre Order Traversal ==============");
+tree.preOrderForEach((node) => {
+  console.log(node.value);
+});
+
+console.log("============= Post Order Traversal ==============");
+tree.postOrderForEach((node) => {
   console.log(node.value);
 });

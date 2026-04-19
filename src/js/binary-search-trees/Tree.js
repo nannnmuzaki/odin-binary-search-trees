@@ -201,4 +201,23 @@ export class Tree {
       current = current.rightChild;
     }
   }
+
+  preOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Callback function is required");
+    }
+
+    let stack = [];
+    let current = this.#root;
+    while (current !== null || stack.length > 0) {
+      while (current !== null) {
+        stack.push(current);
+        callback(current);
+        current = current.leftChild;
+      }
+      current = stack.pop();
+
+      current = current.rightChild;
+    }
+  }
 }

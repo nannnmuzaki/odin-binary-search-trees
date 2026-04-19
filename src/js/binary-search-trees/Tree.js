@@ -162,6 +162,10 @@ export class Tree {
   }
 
   levelOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Callback function is required");
+    }
+
     const queue = new Queue();
 
     queue.enqueue(this.#root);

@@ -7,10 +7,6 @@ export class Tree {
     this.#root = this.#buildTree(array, 0, array.length - 1);
   }
 
-  get root() {
-    return this.#root;
-  }
-
   #buildTree(array, start, end) {
     if (start > end) return null;
 
@@ -150,5 +146,9 @@ export class Tree {
       current = current.leftChild;
     }
     return current;
+  }
+
+  delete(value) {
+    this.#deleteNode(this.#root, value);
   }
 }

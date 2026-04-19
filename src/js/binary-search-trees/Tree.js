@@ -7,6 +7,10 @@ export class Tree {
     this.#root = this.#buildTree(array, 0, array.length - 1);
   }
 
+  get root() {
+    return this.#root;
+  }
+
   #buildTree(array, start, end) {
     if (start > end) return null;
 
@@ -116,24 +120,28 @@ export class Tree {
     if (!Number.isSafeInteger(value)) {
       throw new TypeError("Value must be an integer");
     }
+    console.log(root.value);
 
     if (root === null) return root;
 
-    if (value < root.data) {
-      root = this.#deleteNode(root.left, value); // eslint-disable-line
-    } else if (value > root.data) {
-      root = this.#deleteNode(root.right, value); // eslint-disable-line
+    if (value < root.value) {
+      root = this.#deleteNode(root.leftChild, value); // eslint-disable-line
+    } else if (value > root.value) {
+      root = this.#deleteNode(root.rightChild, value); // eslint-disable-line
     } else {
-      if (root.left === null) {
-        return root.right;
+      if (root.leftChild === null) {
+        return root.rightChild;
       }
-      if (root.right === null) {
-        return root.left;
+      if (root.rightChild === null) {
+        return root.leftChild;
       }
 
       const inorderSuccessor = this.#getInorderSuccessor(root);
       root.value = inorderSuccessor.value;
-      root.rightChild = this.#deleteNode(root.right, inorderSuccessor.value);
+      root.rightChild = this.#deleteNode(
+        root.rightChild,
+        inorderSuccessor.value,
+      );
     }
   }
 

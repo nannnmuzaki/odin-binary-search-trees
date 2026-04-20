@@ -286,4 +286,28 @@ export class Tree {
     }
     return undefined;
   }
+
+  depth(value) {
+    if (!Number.isSafeInteger(value)) {
+      throw new TypeError("Value must be an integer");
+    }
+
+    let current = this.#root;
+    let depthCount = 0;
+
+    while (current !== null) {
+      if (Object.is(current.value, value)) {
+        return depthCount;
+      }
+      if (value < current.value) {
+        current = current.leftChild;
+        depthCount++;
+      } else {
+        current = current.rightChild;
+        depthCount++;
+      }
+    }
+
+    return undefined;
+  }
 }

@@ -330,4 +330,15 @@ export class Tree {
   isBalanced() {
     return this.#isNodeBalanced(this.#root) !== null;
   }
+
+  rebalance() {
+    if (!this.isBalanced()) {
+      const arr = [];
+      this.inOrderForEach((node) => {
+        arr.push(node.value);
+      });
+
+      this.#root = this.#buildTree(arr, 0, arr.length - 1);
+    }
+  }
 }

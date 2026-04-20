@@ -46,3 +46,14 @@ console.log("============= Depth of a tree node test ==============");
 console.log(tree.find(1));
 console.log(tree.includes(1));
 console.log(tree.depth(1));
+
+tree.insert(5);
+tree.insert(6);
+console.log("============= Is Balanced Tree test ==============");
+console.log("Before:");
+Tree.prettyPrint(tree.root);
+console.log("Is balanced: " + tree.isBalanced());
+console.log("After rebalance:");
+tree.rebalance();
+Tree.prettyPrint(tree.root);
+console.log("Is balanced: " + tree.isBalanced());

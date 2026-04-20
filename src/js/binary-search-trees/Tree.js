@@ -310,4 +310,24 @@ export class Tree {
 
     return undefined;
   }
+
+  #isNodeBalanced(node) {
+    if (node === null) return -1;
+
+    const leftHeight = this.#isNodeBalanced(node.leftChild);
+    if (leftHeight === null) return null;
+
+    const rightHeight = this.#isNodeBalanced(node.rightChild);
+    if (rightHeight === null) return null;
+
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+      return null;
+    }
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  isBalanced() {
+    return this.#isNodeBalanced(this.#root) !== null;
+  }
 }

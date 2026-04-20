@@ -36,3 +36,13 @@ console.log("============= Post Order Traversal ==============");
 tree.postOrderForEach((node) => {
   console.log(node.value);
 });
+
+console.log("============= Height of a tree node test ==============");
+console.log(tree.find(1));
+console.log(tree.includes(1));
+console.log(tree.height(1));
+
+console.log("============= Depth of a tree node test ==============");
+console.log(tree.find(1));
+console.log(tree.includes(1));
+console.log(tree.depth(1));

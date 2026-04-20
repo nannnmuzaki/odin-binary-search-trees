@@ -65,7 +65,7 @@ export class Tree {
     );
   }
 
-  includes(value) {
+  find(value) {
     if (!Number.isSafeInteger(value)) {
       throw new TypeError("Value must be an integer");
     }
@@ -74,7 +74,7 @@ export class Tree {
 
     while (current !== null) {
       if (Object.is(value, current.value)) {
-        return true;
+        return current;
       }
 
       if (value < current.value) {
@@ -84,12 +84,25 @@ export class Tree {
       }
     }
 
+    return null;
+  }
+
+  includes(value) {
+    if (this.find(value) !== null) {
+      return true;
+    }
+
     return false;
   }
 
   insert(value) {
     if (!Number.isSafeInteger(value)) {
       throw new TypeError("Value must be an integer");
+    }
+
+    if (this.#root === null) {
+      this.#root = new TreeNode(value);
+      return;
     }
 
     let current = this.#root;
@@ -253,5 +266,24 @@ export class Tree {
         current = null;
       }
     }
+  }
+
+  #findNodeHeight(node) {
+    if (node === null) return -1;
+
+    const leftHeight = this.#findNodeHeight(node.leftChild);
+    const rightHeight = this.#findNodeHeight(node.rightChild);
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  height(value) {
+    const targetNode = this.find(value);
+
+    const height = this.#findNodeHeight(targetNode);
+    if (height >= 0) {
+      return height;
+    }
+    return undefined;
   }
 }
